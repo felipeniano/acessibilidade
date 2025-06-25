@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathSecurity - Matemática para Senhas Seguras</title>
+    <style>
+        /* CSS será adicionado na próxima seção */
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>MathSecurity</h1>
+            <p>Utilizando matemática para criar senhas seguras</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#intro">Introdução</a></li>
+                <li><a href="#matematica">Matemática das Senhas</a></li>
+                <li><a href="#gerador">Gerador Matemático</a></li>
+                <li><a href="#dicas">Dicas de Segurança</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="intro">
+            <h2>Por que matemática para senhas?</h2>
+            <p>A segurança digital começa com senhas fortes. A matemática nos fornece ferramentas poderosas para criar e avaliar a segurança de nossas senhas.</p>
+            <p>Neste site, você aprenderá como:</p>
+            <ul>
+                <li>Calcular a entropia de uma senha</li>
+                <li>Usar algoritmos matemáticos para gerar senhas seguras</li>
+                <li>Implementar técnicas baseadas em teoria dos números</li>
+                <li>Criar senhas memoráveis mas complexas</li>
+            </ul>
+        </section>
+
+        <section id="matematica">
+            <h2>A Matemática por Trás das Senhas Seguras</h2>
+            <article>
+                <h3>Entropia de Senhas</h3>
+                <p>A entropia mede a imprevisibilidade de uma senha. É calculada por:</p>
+                <p class="formula">H = L × log₂(N)</p>
+                <p>Onde:
+                    <br>H = Entropia em bits
+                    <br>L = Comprimento da senha
+                    <br>N = Tamanho do conjunto de caracteres possíveis
+                </p>
+                <div class="calculator">
+                    <h4>Calculadora de Entropia</h4>
+                    <label for="length">Comprimento da senha:</label>
+                    <input type="number" id="length" min="1" value="12">
+                    
+                    <label for="charset">Conjunto de caracteres:</label>
+                    <select id="charset">
+                        <option value="26">Apenas letras minúsculas (26)</option>
+                        <option value="52">Letras maiúsculas e minúsculas (52)</option>
+                        <option value="62">Letras e números (62)</option>
+                        <option value="94">Todos caracteres ASCII imprimíveis (94)</option>
+                    </select>
+                    
+                    <button onclick="calculateEntropy()">Calcular Entropia</button>
+                    <div id="entropy-result"></div>
+                </div>
+            </article>
+
+            <article>
+                <h3>Números Primos e Senhas</h3>
+                <p>Números primos são fundamentais na criptografia. Você pode usá-los para criar senhas:</p>
+                <p>Exemplo: Combine primos conhecidos com palavras pessoais para criar senhas fortes.</p>
+                <p>Primo de 4 dígitos: 7919 + "Casa" = "7919Casa!"</p>
+            </article>
+        </section>
+
+        <section id="gerador">
+            <h2>Gerador Matemático de Senhas</h2>
+            <div class="generator">
+                <div class="controls">
+                    <label for="pass-length">Tamanho:</label>
+                    <input type="range" id="pass-length" min="8" max="32" value="16">
+                    <span id="length-value">16</span>
+                    
+                    <label><input type="checkbox" id="uppercase" checked> Maiúsculas</label>
+                    <label><input type="checkbox" id="lowercase" checked> Minúsculas</label>
+                    <label><input type="checkbox" id="numbers" checked> Números</label>
+                    <label><input type="checkbox" id="symbols" checked> Símbolos</label>
+                    
+                    <button onclick="generatePassword()">Gerar Senha</button>
+                </div>
+                
+                <div class="result">
+                    <input type="text" id="password-result" readonly>
+                    <button onclick="copyPassword()">Copiar</button>
+                    <div id="strength-meter"></div>
+                </div>
+            </div>
+            
+            <article>
+                <h3>Como funciona nosso gerador?</h3>
+                <p>Nosso algoritmo utiliza:</p>
+                <ul>
+                    <li>Funções hash criptográficas</li>
+                    <li>Operações modulares para garantir distribuição uniforme</li>
+                    <li>Conversão de valores aleatórios para caracteres</li>
+                    <li>Verificação de entropia mínima</li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="dicas">
+            <h2>Dicas Matemáticas para Senhas Seguras</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Método da Frase</h3>
+                    <p>Transforme uma frase em senha usando iniciais e números:</p>
+                    <p>"Meu cachorro Bob nasceu em 12 de janeiro de 2015" → "McBne12/01/15!"</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Sequências Não Óbvias</h3>
+                    <p>Use sequências matemáticas conhecidas, mas não óbvias:</p>
+                    <p>Fibonacci (1,1,2,3,5,8) → "112358#Fi"</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Substituição Baseada em Primos</h3>
+                    <p>Substitua letras por números primos:</p>
+                    <p>A=2, B=3, C=5, D=7, E=11 → "Casa" → "521121"</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 MathSecurity - Todos os direitos reservados</p>
+            <p>Este site é educativo e não substitui um profissional de segurança da informação</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript será adicionado na próxima seção
+    </script>
+</body>
+</html>
