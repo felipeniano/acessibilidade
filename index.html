@@ -4,46 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Senhas Seguras</title>
-    <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Gerador de Senhas Seguras</h1>
-            <p>Use matemática para criar senhas fortes</p>
-        </header>
-
-        <main>
-            <section class="generator-section">
-                <div class="generator">
-                    <div class="controls">
-                        <label for="pass-length">Tamanho da senha: <span id="length-value">16</span></label>
-                        <input type="range" id="pass-length" min="8" max="32" value="16">
-                        
-                        <div class="checkboxes">
-                            <label><input type="checkbox" id="uppercase" checked> ABC (Maiúsculas)</label>
-                            <label><input type="checkbox" id="lowercase" checked> abc (Minúsculas)</label>
-                            <label><input type="checkbox" id="numbers" checked> 123 (Números)</label>
-                            <label><input type="checkbox" id="symbols" checked> !@# (Símbolos)</label>
-                        </div>
-                        
-                        <button id="generate-btn">Gerar Senha</button>
-                    </div>
+        <h1>Gerador de Senhas Seguras</h1>
+        
+        <div class="generator-box">
+            <div class="controls">
+                <div class="input-group">
+                    <label for="length">Comprimento:</label>
+                    <input type="number" id="length" min="8" max="64" value="16">
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="uppercase" checked>
+                        <span>Letras Maiúsculas (A-Z)</span>
+                    </label>
                     
-                    <div class="result">
-                        <input type="text" id="password-result" readonly>
-                        <button id="copy-btn">Copiar</button>
-                        <div id="strength-meter">
-                            <div class="meter-bar"></div>
-                        </div>
+                    <label>
+                        <input type="checkbox" id="lowercase" checked>
+                        <span>Letras Minúsculas (a-z)</span>
+                    </label>
+                    
+                    <label>
+                        <input type="checkbox" id="numbers" checked>
+                        <span>Números (0-9)</span>
+                    </label>
+                    
+                    <label>
+                        <input type="checkbox" id="symbols" checked>
+                        <span>Símbolos (!@#$%^&*)</span>
+                    </label>
+                </div>
+                
+                <button id="generate">Gerar Senha</button>
+            </div>
+            
+            <div class="result">
+                <div class="password-display">
+                    <input type="text" id="password" readonly>
+                    <button id="copy">Copiar</button>
+                </div>
+                
+                <div class="strength-meter">
+                    <div class="meter-label">Força da senha:</div>
+                    <div class="meter-bar">
+                        <div id="meter-level"></div>
+                    </div>
+                    <div id="strength-text">Fraca</div>
+                </div>
+                
+                <div class="entropy-info">
+                    <div>
+                        <span>Entropia:</span>
+                        <span id="entropy-bits">0</span> bits
+                    </div>
+                    <div>
+                        <span>Combinações:</span>
+                        <span id="combinations">0</span>
+                    </div>
+                    <div>
+                        <span>Tempo para quebrar:</span>
+                        <span id="break-time">instantâneo</span>
                     </div>
                 </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>Gerador de senhas seguras usando algoritmos criptográficos</p>
-        </footer>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
