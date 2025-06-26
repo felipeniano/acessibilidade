@@ -4,76 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Senhas Seguras</title>
-      <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Novas Cores e Tipografia */
+        :root {
+            --primary: #0f2027;
+            --secondary: #203a43;
+            --accent: #f2545b;
+            --light: #f4f4f4;
+            --dark: #1b1b1b;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --danger: #e74c3c;
+            --text-light: #f4f4f4;
+            --text-dark: #111;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .generator-box {
+            background-color: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .controls, .result {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.15);
+            color: var(--text-light);
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .checkbox-group input {
+            margin-right: 0.8rem;
+            accent-color: var(--accent);
+        }
+
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .strength-meter, .entropy-info {
+            background: rgba(255,255,255,0.08);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .meter-bar {
+            height: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #meter-level {
+            height: 100%;
+            width: 0%;
+            background-color: var(--danger);
+            transition: width 0.4s;
+        }
+
+        @media (max-width: 768px) {
+            .generator-box {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Gerador de Senhas Seguras</h1>
-        
         <div class="generator-box">
             <div class="controls">
-                <div class="input-group">
-                    <label for="length">Comprimento:</label>
-                    <input type="number" id="length" min="8" max="64" value="16">
-                </div>
-                
+                <label for="length">Comprimento:</label>
+                <input type="number" id="length" min="8" max="64" value="16">
                 <div class="checkbox-group">
-                    <label>
-                        <input type="checkbox" id="uppercase" checked>
-                        <span>Letras Maiúsculas (A-Z)</span>
-                    </label>
-                    
-                    <label>
-                        <input type="checkbox" id="lowercase" checked>
-                        <span>Letras Minúsculas (a-z)</span>
-                    </label>
-                    
-                    <label>
-                        <input type="checkbox" id="numbers" checked>
-                        <span>Números (0-9)</span>
-                    </label>
-                    
-                    <label>
-                        <input type="checkbox" id="symbols" checked>
-                        <span>Símbolos (!@#$%^&*)</span>
-                    </label>
+                    <label><input type="checkbox" id="uppercase" checked> Letras Maiúsculas (A-Z)</label>
+                    <label><input type="checkbox" id="lowercase" checked> Letras Minúsculas (a-z)</label>
+                    <label><input type="checkbox" id="numbers" checked> Números (0-9)</label>
+                    <label><input type="checkbox" id="symbols" checked> Símbolos (!@#$%^&*)</label>
                 </div>
-                
                 <button id="generate">Gerar Senha</button>
             </div>
-            
             <div class="result">
                 <div class="password-display">
                     <input type="text" id="password" readonly>
                     <button id="copy">Copiar</button>
                 </div>
-                
                 <div class="strength-meter">
-                    <div class="meter-label">Força da senha:</div>
+                    <div>Força da senha:</div>
                     <div class="meter-bar">
                         <div id="meter-level"></div>
                     </div>
                     <div id="strength-text">Fraca</div>
                 </div>
-                
                 <div class="entropy-info">
-                    <div>
-                        <span>Entropia:</span>
-                        <span id="entropy-bits">0</span> bits
-                    </div>
-                    <div>
-                        <span>Combinações:</span>
-                        <span id="combinations">0</span>
-                    </div>
-                    <div>
-                        <span>Tempo para quebrar:</span>
-                        <span id="break-time">instantâneo</span>
-                    </div>
+                    <div><span>Entropia:</span> <span id="entropy-bits">0</span> bits</div>
+                    <div><span>Combinações:</span> <span id="combinations">0</span></div>
+                    <div><span>Tempo para quebrar:</span> <span id="break-time">instantâneo</span></div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
